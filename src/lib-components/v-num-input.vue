@@ -58,6 +58,9 @@ export default {
       }
     },
   },
+  model: {
+    event: 'change',
+  },
   props: {
     readonly: {
       type: Boolean,
@@ -66,22 +69,46 @@ export default {
     rounded: {
       type: Boolean,
       default: false
-    }
+    },
+    max: {
+      type: Number,
+      default: Infinity,
+    },
+    min: {
+      type: Number,
+      default: -Infinity,
+    },
+    value: {
+      type: Number,
+      default: NaN,
+    },
   },
   data() {
     return {
-      counter: 5,
-      initCounter: 5,
+      counter: 5
     };
+  },
+  created() {
+    this.counter =  Math.min(this.max, Math.max(this.min, this.value))
   },
   methods: {
     increment(arg) {
+      const oldValue = this.counter;
+
       const amount = (typeof arg !== 'number') ? 1 : arg;
-      this.counter += amount;
+
+      this.counter = Math.min(this.max, Math.max(this.min, this.counter + amount))
+
+      this.$emit('change', this.counter, oldValue)
     },
     decrement(arg) {
+      const oldValue = this.counter;
+
       const amount = (typeof arg !== 'number') ? 1 : arg;
-      this.counter -= amount;
+
+      this.counter = Math.min(this.max, Math.max(this.min, this.counter - amount))
+
+      this.$emit('change', this.counter, oldValue)
     }
   }
 };
@@ -90,20 +117,28 @@ export default {
 <template>
   <div class="v-num-input">
     <button @click="decrement" v-long-click="decrement" v-bind:class="{ round: rounded }">-</button>
-    <p v-if="readonly">{{ counter }}</p>
+    <p v-if="readonly" v-model="counter">{{ counter }}</p>
     <button @click="increment" v-long-click="increment" v-bind:class="{ round: rounded }">+</button>
   </div>
 </template>
 
 <style scoped>
+:root {
+  --primary-color: #41b883;
+  --on-primary-color: white;
+
+  --small-spacing: 12px;
+  --normal-spacing: calc(var(--small-spacing) * 2);
+}
 button {
-  width: 30px;
-  height: 30px;
+  border: 4px solid var(--button-border-color, var(--primary-color));
+  padding: var(--small-spacing) var(--normal-spacing);
+  transition: 0.25s ease-in-out all;
 }
 
 .v-num-input {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
 }
 
@@ -118,6 +153,5 @@ button {
 
 .v-num-input button.round {
   border-radius: 50%;
-
 }
 </style>
