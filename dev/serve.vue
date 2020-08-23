@@ -12,6 +12,6 @@ export default Vue.extend({
 
 <template>
   <div id="app">
-    <v-num-input readonly/>
+    <v-num-input readonly rounded/>
   </div>
 </template>

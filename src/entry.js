@@ -1,6 +1,5 @@
 // Import vue components
 import * as components from '@/lib-components/index';
-import longclick from "@/lib-components/directives/longclick";
 
 // install function executed by Vue.use()
 const install = function installVNumInput(Vue) {
