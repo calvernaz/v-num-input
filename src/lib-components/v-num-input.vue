@@ -66,10 +66,6 @@ export default {
       type: Boolean,
       default: false
     },
-    rounded: {
-      type: Boolean,
-      default: false
-    },
     max: {
       type: Number,
       default: Infinity,
@@ -89,7 +85,7 @@ export default {
     };
   },
   created() {
-    this.counter =  Math.min(this.max, Math.max(this.min, this.value))
+    this.counter = Math.min(this.max, Math.max(this.min, this.value))
   },
   methods: {
     increment(arg) {
@@ -116,30 +112,28 @@ export default {
 
 <template>
   <div class="v-num-input">
-    <button @click="decrement" v-long-click="decrement" v-bind:class="{ round: rounded }">-</button>
+    <button @click="decrement" v-long-click="decrement">-</button>
     <p v-if="readonly" v-model="counter">{{ counter }}</p>
     <button @click="increment" v-long-click="increment" v-bind:class="{ round: rounded }">+</button>
   </div>
 </template>
 
 <style scoped>
-:root {
-  --primary-color: #41b883;
-  --on-primary-color: white;
-
-  --small-spacing: 12px;
-  --normal-spacing: calc(var(--small-spacing) * 2);
-}
-button {
-  border: 4px solid var(--button-border-color, var(--primary-color));
-  padding: var(--small-spacing) var(--normal-spacing);
-  transition: 0.25s ease-in-out all;
-}
 
 .v-num-input {
   align-items: center;
   display: flex;
   justify-content: center;
+
+  --button-border-color: green;
+  --normal-padding: 10px;
+}
+
+.v-num-input button {
+  border: 1px solid var(--button-border-color);
+  padding: var(--normal-padding);
+  outline: none;
+  transition: 0.25s ease-in-out all;
 }
 
 .v-num-input p {
@@ -147,11 +141,4 @@ button {
   margin: 0 5px;
 }
 
-.v-num-input button {
-  outline: none;
-}
-
-.v-num-input button.round {
-  border-radius: 50%;
-}
 </style>

@@ -17,13 +17,13 @@ export default Vue.extend({
 
 <template>
   <div id="app">
-    <v-num-input class="custom-theme" readonly rounded :min="0" :max="5" v-on:change="onchange" :value="-1"/>
+    <v-num-input readonly :min="0" :max="5" v-on:change="onchange" :value="-1" class="custom-theme" />
   </div>
 </template>
 
 <style scoped>
 .custom-theme {
-  --button-border-color: pink;
-  --button-hover-background-color: rgb(206, 161, 195);
+  --normal-padding: 50px;
+  --button-border-color: green;
 }
 </style>
