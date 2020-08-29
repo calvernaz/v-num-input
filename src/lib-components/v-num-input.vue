@@ -114,7 +114,7 @@ export default {
   <div class="v-num-input">
     <button @click="decrement" v-long-click="decrement">-</button>
     <p v-if="readonly" v-model="counter">{{ counter }}</p>
-    <button @click="increment" v-long-click="increment" v-bind:class="{ round: rounded }">+</button>
+    <button @click="increment" v-long-click="increment">+</button>
   </div>
 </template>
 
@@ -126,14 +126,18 @@ export default {
   justify-content: center;
 
   --button-border-color: green;
+  --button-border-radius: 0;
   --normal-padding: 10px;
 }
 
 .v-num-input button {
+  background-color: white;
   border: 1px solid var(--button-border-color);
+  border-radius: var(--button-border-radius);
   padding: var(--normal-padding);
   outline: none;
   transition: 0.25s ease-in-out all;
+
 }
 
 .v-num-input p {
