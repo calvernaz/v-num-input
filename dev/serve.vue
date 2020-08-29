@@ -23,8 +23,7 @@ export default Vue.extend({
 
 <style scoped>
 .custom-theme {
-  --normal-padding: 4px;
-  --button-border-color: green;
-  --button-border-radius: 50%;
+  --button-width: 22px;
+  --button-height: 22px;
 }
 </style>

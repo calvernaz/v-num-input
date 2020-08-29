@@ -112,9 +112,9 @@ export default {
 
 <template>
   <div class="v-num-input">
-    <button @click="decrement" v-long-click="decrement">-</button>
+    <button @click="decrement" v-long-click="decrement" class="minus"></button>
     <p v-if="readonly" v-model="counter">{{ counter }}</p>
-    <button @click="increment" v-long-click="increment">+</button>
+    <button @click="increment" v-long-click="increment" class="plus"></button>
   </div>
 </template>
 
@@ -125,24 +125,75 @@ export default {
   display: flex;
   justify-content: center;
 
+  --button-border-width: 2px;
+  --button-border-style: solid;
   --button-border-color: green;
-  --button-border-radius: 0;
-  --normal-padding: 10px;
+  --butotn-border-radius: 100%;
+  --button-background-color: white;
+  --button-plus-background: green;
+  --button-minus-background: green;
+  --button-width: 22px;
+  --button-height: 22px;
+  --button-margin: 0;
+  --normal-padding: 0;
+  --text-color: green;
 }
 
 .v-num-input button {
-  background-color: white;
-  border: 1px solid var(--button-border-color);
-  border-radius: var(--button-border-radius);
-  padding: var(--normal-padding);
+  border-width: var(--button-border-width);
+  border-style: var(--button-border-style);
+  border-color: var(--button-border-color);
+  border-radius: var(--butotn-border-radius);
+  background-color: var(--button-background-color);
+  width: var(--button-width);
+  height: var(--button-height);
+  position: relative;
+  margin: var(--button-margin);
+  display: inline-block;
+  vertical-align: middle;
   outline: none;
-  transition: 0.25s ease-in-out all;
+}
 
+.v-num-input button:before,
+.v-num-input button:after {
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+/* PLUS */
+
+.v-num-input button.plus:before,
+.v-num-input button.plus:after {
+  background:var(--button-plus-background);
+  /*box-shadow: 1px 1px 1px #ffffff9e;*/
+}
+
+.v-num-input button.plus:before{
+  width: 2px;
+  margin: 3px auto;
+}
+
+.v-num-input button.plus:after{
+  margin: auto 3px;
+  height: 2px;
+  box-shadow: none;
+}
+/* MINUS */
+.v-num-input button.minus:before{
+  background: var(--button-minus-background);
+  margin: auto 3px;
+  height: 2px;
+  /*box-shadow: 0 1px 1px #ffffff9e;*/
 }
 
 .v-num-input p {
   padding: 0.20rem;
   margin: 0 5px;
+  color: var(--text-color);
 }
 
 </style>
